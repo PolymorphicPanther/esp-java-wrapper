@@ -14,7 +14,7 @@ public class Option {
     /**
      * Value of the option
      */
-    private final String value;
+    private final Object value;
 
     /**
      * Creates an option object
@@ -22,7 +22,7 @@ public class Option {
      * @param name  the name of the option
      * @param value the value of the option
      */
-    public Option(@NotNull final String name, @Nullable final String value) {
+    public Option(@NotNull final String name, @Nullable final Object value) {
         Objects.requireNonNull(name, "name should not be null");
         if (name.isEmpty()) {
             throw new IllegalArgumentException("name should not empty");
@@ -47,7 +47,7 @@ public class Option {
      * @return the value of the option
      */
     @Nullable
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 }

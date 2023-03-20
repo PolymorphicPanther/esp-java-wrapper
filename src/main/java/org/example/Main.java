@@ -2,8 +2,6 @@ package org.example;
 
 import org.example.authentication.BasicTokenCredentialAuthProvider;
 
-import java.io.IOException;
-
 public class Main {
     public static void main(String[] args) {
         var authProvider = new BasicTokenCredentialAuthProvider("xxxx-xxxx-xxxx");
@@ -21,6 +19,14 @@ public class Main {
 
 
         System.out.println(areaInfo);
+
+        var areasNearBy = client
+                .area()
+                .areasNearBy(-26.0269658, 28.0137339)
+                .build()
+                .get();
+
+        System.out.println(areasNearBy);
 
 
     }

@@ -21,9 +21,10 @@ public class AreaRequestBuilder {
         return new AreaInfoRequestBuilder(client, addPathToUrl(requestUrl, urlPath), auth, areaId);
     }
 
-//    public AreasNearByRequestBuilder areasNearBy(){
-//
-//    }
+    public AreasNearByRequestBuilder areasNearBy(double lat, double lon){
+        var urlPath = "areas_nearby";
+        return new AreasNearByRequestBuilder(client, addPathToUrl(requestUrl, urlPath), auth, lat, lon);
+    }
 //
 //    public AreaSearchRequestBuilder areaSearch(){
 //

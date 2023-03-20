@@ -58,7 +58,7 @@ public class BaseRequest<T> {
 
                 sb.append(name)
                         .append('=')
-                        .append(URLEncoder.encode(value, StandardCharsets.UTF_8).replace("\\+", "%20"));
+                        .append(URLEncoder.encode(value.toString(), StandardCharsets.UTF_8).replace("\\+", "%20"));
 
                 if (i < queryOptions.size() - 1) {
                     sb.append('&');
