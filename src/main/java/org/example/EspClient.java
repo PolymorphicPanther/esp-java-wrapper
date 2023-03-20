@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.authentication.IAuthenticationProvider;
+import org.example.requests.AllowanceRequestBuilder;
 import org.example.requests.AreaRequestBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +26,10 @@ public class EspClient {
 
     public AreaRequestBuilder area() {
         return new AreaRequestBuilder(httpClient, baseUrl, auth);
+    }
+
+    public AllowanceRequestBuilder allowance(){
+        return new AllowanceRequestBuilder(httpClient, baseUrl, auth);
     }
 
 

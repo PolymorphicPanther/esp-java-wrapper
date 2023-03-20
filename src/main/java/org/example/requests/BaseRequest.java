@@ -1,12 +1,15 @@
 package org.example.requests;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.ClientException;
 import org.example.EspApiException;
-import org.example.authentication.IAuthenticationProvider;
 import org.example.Option;
+import org.example.authentication.IAuthenticationProvider;
 
+import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -78,6 +81,9 @@ public class BaseRequest<T> {
 
         var mapper = new ObjectMapper();
         mapper.findAndRegisterModules();
+        Annotation rootAnnotation = responseClass.getAnnotation(JsonRootName.class);
+        mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, rootAnnotation != null);
+
 
         try {
             return mapper.readValue(resp.body(), responseClass);

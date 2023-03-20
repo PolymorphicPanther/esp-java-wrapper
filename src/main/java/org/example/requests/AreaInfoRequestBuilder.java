@@ -10,25 +10,20 @@ import java.net.http.HttpClient;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class AreaInfoRequestBuilder {
+public class AreaInfoRequestBuilder extends BaseRequestBuilder {
 
-    private final HttpClient client;
-    private final String requestUrl;
-    private final IAuthenticationProvider auth;
     private final String areaId;
     private SampleInfoTest testMode = null;
 
     public AreaInfoRequestBuilder(final HttpClient client, final String requestUrl, IAuthenticationProvider auth, final String areaId) {
-        this.client = client;
-        this.requestUrl = requestUrl;
-        this.auth = auth;
+        super(client, requestUrl, auth);
         this.areaId = areaId;
     }
 
     @NotNull
     public AreaInfoRequestBuilder areaId(@NotNull final String areaId) {
         Objects.requireNonNull(areaId, "parameter areaId cannot be null");
-        return new AreaInfoRequestBuilder(client, requestUrl, auth, areaId);
+    return new AreaInfoRequestBuilder(getClient(), getRequestUrl(), getAuth(), areaId);
     }
 
     @NotNull
@@ -48,7 +43,7 @@ public class AreaInfoRequestBuilder {
             options.add(new Option("test", testMode.toString()));
         }
 
-        return new AreaInfoRequest(client, requestUrl, auth, options);
+        return new AreaInfoRequest(getClient(), getRequestUrl(), getAuth(), options);
     }
 
 }

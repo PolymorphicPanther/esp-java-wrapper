@@ -4,36 +4,24 @@ import org.example.authentication.IAuthenticationProvider;
 
 import java.net.http.HttpClient;
 
-public class AreaRequestBuilder {
-
-    private final HttpClient client;
-    private final String requestUrl;
-    private final IAuthenticationProvider auth;
+public class AreaRequestBuilder extends BaseRequestBuilder {
 
     public AreaRequestBuilder(final HttpClient client, final String requestUrl, IAuthenticationProvider auth) {
-        this.client = client;
-        this.requestUrl = requestUrl;
-        this.auth = auth;
+        super(client, requestUrl, auth);
     }
 
     public AreaInfoRequestBuilder info(String areaId) {
         var urlPath = "area";
-        return new AreaInfoRequestBuilder(client, addPathToUrl(requestUrl, urlPath), auth, areaId);
+        return new AreaInfoRequestBuilder(getClient(), addPathToUrl(urlPath), getAuth(), areaId);
     }
 
-    public AreasNearByRequestBuilder areasNearBy(double lat, double lon){
+    public AreasNearByRequestBuilder nearBy(double lat, double lon){
         var urlPath = "areas_nearby";
-        return new AreasNearByRequestBuilder(client, addPathToUrl(requestUrl, urlPath), auth, lat, lon);
+        return new AreasNearByRequestBuilder(getClient(), addPathToUrl(urlPath), getAuth(), lat, lon);
     }
-//
-//    public AreaSearchRequestBuilder areaSearch(){
-//
-//    }
 
-    private String addPathToUrl(String url, String path) {
-        if (url.endsWith("/")) {
-            return url + path;
-        }
-        return url + '/' + path;
+    public AreaSearchRequestBuilder search(String text){
+        var urlPath = "areas_search";
+        return new AreaSearchRequestBuilder(getClient(), addPathToUrl(urlPath), getAuth(), text);
     }
 }
