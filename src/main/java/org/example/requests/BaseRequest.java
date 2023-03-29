@@ -8,6 +8,8 @@ import org.example.ClientException;
 import org.example.EspApiException;
 import org.example.Option;
 import org.example.authentication.IAuthenticationProvider;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
@@ -20,8 +22,12 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-
-public class BaseRequest<T> {
+/**
+ * Class for Base Request
+ *
+ * @param <T> - response class
+ */
+public abstract class BaseRequest<T> {
 
     private static final String TOKEN_HEADER = "Token";
 
@@ -32,23 +38,41 @@ public class BaseRequest<T> {
     private final String requestUrl;
 
 
-    public BaseRequest(final HttpClient client,
-                       final String requestUrl,
-                       IAuthenticationProvider auth,
-                       final List<Option> queryOptions,
-                       final Class<? extends T> responseClass) {
-        this.auth = auth;
+    /**
+     * Base Request
+     *
+     * @param client        - http client
+     * @param requestUrl    - requestUrl
+     * @param authProvider  - authProvider authProvider
+     * @param queryOptions  - query options
+     * @param responseClass - response class
+     */
+    public BaseRequest(@NotNull final HttpClient client,
+                       @NotNull final String requestUrl,
+                       @NotNull final IAuthenticationProvider authProvider,
+                       @Nullable List<Option> queryOptions,
+                       @NotNull final Class<? extends T> responseClass
+    ) {
+        this.auth = authProvider;
         this.queryOptions = queryOptions;
         this.responseClass = responseClass;
         this.client = client;
         this.requestUrl = requestUrl;
     }
 
+    /**
+     * Builds the URL represented by the request
+     * Combines the requestUrl and query options
+     *
+     * @return - URL
+     * @throws MalformedURLException - the combined string does not constitute a valid URL
+     */
+    @NotNull
     public URL getRequestUrl() throws MalformedURLException {
 
         final var sb = new StringBuilder(requestUrl);
 
-        if (queryOptions.size() > 0) {
+        if (queryOptions != null && queryOptions.size() > 0) {
             sb.append('?');
 
             for (var i = 0; i < queryOptions.size(); i++) {
@@ -72,7 +96,13 @@ public class BaseRequest<T> {
         return new URL(sb.toString());
     }
 
-    protected T send() throws ClientException {
+    /**
+     * Makes a GET request to the URL represented by the request
+     *
+     * @return - instance of the response type
+     */
+    @NotNull
+    protected T send() {
         var resp = sendInternal();
         var statusCode = resp.statusCode();
         if (statusCode < 200 || statusCode > 299) {
@@ -93,7 +123,15 @@ public class BaseRequest<T> {
 
     }
 
-    protected HttpResponse<String> sendInternal() throws ClientException {
+
+    /**
+     * Makes a GET request and returns the response to the caller.
+     * The response is mapped to a string and should be deserialized by the caller.
+     *
+     * @return - HttpResponse<String>
+     */
+    @NotNull
+    private HttpResponse<String> sendInternal() {
         try {
             var req = HttpRequest.newBuilder()
                     .uri(getRequestUrl().toURI())

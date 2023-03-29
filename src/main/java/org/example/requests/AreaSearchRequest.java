@@ -3,16 +3,37 @@ package org.example.requests;
 import org.example.Option;
 import org.example.authentication.IAuthenticationProvider;
 import org.example.models.AreaSearchResponse;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.http.HttpClient;
 import java.util.List;
 
-public class AreaSearchRequest extends BaseRequest<AreaSearchResponse>{
-    public AreaSearchRequest(HttpClient client, String requestUrl, IAuthenticationProvider auth, List<Option> queryOptions) {
+/**
+ * Class for area search request
+ * <p>
+ * Searches for an area based on text
+ */
+public class AreaSearchRequest extends BaseRequest<AreaSearchResponse> {
+
+    /**
+     * Request for Area Search
+     *
+     * @param client       - http client
+     * @param requestUrl   - requestUrl
+     * @param auth         - authProvider
+     * @param queryOptions - request query options
+     */
+    public AreaSearchRequest(@NotNull final HttpClient client, @NotNull final String requestUrl, @NotNull final IAuthenticationProvider auth, @NotNull final List<Option> queryOptions) {
         super(client, requestUrl, auth, queryOptions, AreaSearchResponse.class);
     }
 
-    public AreaSearchResponse get(){
+    /**
+     * Gets the AreaSearchResponse from ESP
+     *
+     * @return - AreaSearchResponse
+     */
+    @NotNull
+    public AreaSearchResponse get() {
         return send();
     }
 }

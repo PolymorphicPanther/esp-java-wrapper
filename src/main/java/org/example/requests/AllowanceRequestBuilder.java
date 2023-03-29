@@ -1,17 +1,34 @@
 package org.example.requests;
 
 import org.example.authentication.IAuthenticationProvider;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.http.HttpClient;
 
+/**
+ * Class for Allowance Request Builder
+ */
 public class AllowanceRequestBuilder extends BaseRequestBuilder {
 
-    public AllowanceRequestBuilder(final HttpClient client, final String requestUrl, final IAuthenticationProvider auth) {
+    /**
+     * Request builder for Allowances
+     *
+     * @param client     - http client
+     * @param requestUrl - requestUrl
+     * @param auth       - auth provider
+     */
+    public AllowanceRequestBuilder(@NotNull final HttpClient client, @NotNull final String requestUrl, @NotNull final IAuthenticationProvider auth) {
         super(client, requestUrl, auth);
     }
 
-    public AllowanceCheckRequestBuilder check(){
-        return new AllowanceCheckRequestBuilder(getClient(), getRequestUrl(), getAuth());
+    /**
+     * Gets a request builder for checking the API allowance
+     *
+     * @return the request builder
+     */
+    @NotNull
+    public AllowanceCheckRequestBuilder check() {
+        return new AllowanceCheckRequestBuilder(getClient(), getRequestUrl(), getAuthProvider());
     }
 
 }

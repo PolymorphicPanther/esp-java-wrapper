@@ -12,9 +12,22 @@ public class Main {
                 .authenticationProvider(authProvider)
                 .build();
 
+        var status = client.status()
+                .build()
+                .get();
+
+        System.out.println(status);
+
+        var topics = client.topics()
+                .nearBy(-26.0269658, 28.0137339)
+                .build()
+                .get();
+
+        System.out.println(topics);
+
 
         var areaInfo = client
-                .area()
+                .areas()
                 .info("eskde-10-fourwaysext10cityofjohannesburggauteng")
                 .build()
                 .get();
@@ -23,7 +36,7 @@ public class Main {
         System.out.println(areaInfo);
 
         var areasNearBy = client
-                .area()
+                .areas()
                 .nearBy(-26.0269658, 28.0137339)
                 .build()
                 .get();
@@ -31,7 +44,7 @@ public class Main {
         System.out.println(Arrays.stream(areasNearBy.areas()));
 
         var areasSearch = client
-                .area()
+                .areas()
                 .search("kokstad")
                 .build()
                 .get();

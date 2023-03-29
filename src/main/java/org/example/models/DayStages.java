@@ -1,6 +1,5 @@
 package org.example.models;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,13 +9,13 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class for Day Stages
+ *
+ * @param stages - stages
+ */
 @JsonDeserialize(using = StageSerializer.class)
-public class DayStages {
-    private Stage[] stages;
-
-    public void setStages(Stage[] stages) {
-        this.stages = stages;
-    }
+public record DayStages(Stage[] stages) {
 }
 
 class StageSerializer extends StdDeserializer<DayStages> {
@@ -24,7 +23,7 @@ class StageSerializer extends StdDeserializer<DayStages> {
         super(vc);
     }
 
-    protected StageSerializer(){
+    protected StageSerializer() {
         super(DayStages.class);
     }
 
@@ -45,8 +44,7 @@ class StageSerializer extends StdDeserializer<DayStages> {
             outputStages.add(new Stage(slots.toArray(new Slot[0])));
         }
 
-        var dayStages = new DayStages();
-        dayStages.setStages(outputStages.toArray(new Stage[0]));
-        return dayStages;
+        var stagesArr = outputStages.toArray(new Stage[0]);
+        return new DayStages(stagesArr);
     }
 }

@@ -2,7 +2,7 @@ package org.example;
 
 import org.jetbrains.annotations.NotNull;
 
-public enum SampleInfoTest {
+public enum SampleInfo {
     CURRENT,
     DATA;
 
