@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("maven-publish")
 }
 
 group = "org.example"
@@ -16,6 +17,19 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            maven(url = "https://maven.pkg.github.com/PolymorphicPanther/esp-java-wrapper")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }
 
 tasks.test {
