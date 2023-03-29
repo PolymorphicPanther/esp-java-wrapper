@@ -3,7 +3,7 @@ plugins {
     id("maven-publish")
 }
 
-group = "org.example"
+group = "org.jesp"
 version = "1.0-SNAPSHOT"
 
 repositories {
