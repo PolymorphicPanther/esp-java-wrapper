@@ -23,7 +23,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            maven(url = "https://maven.pkg.github.com/PolymorphicPanther/esp-java-wrapper")
+            url = uri("https://maven.pkg.github.com/PolymorphicPanther/esp-java-wrapper")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
