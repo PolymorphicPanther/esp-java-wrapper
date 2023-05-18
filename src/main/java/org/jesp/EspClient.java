@@ -17,9 +17,9 @@ import java.util.Objects;
 public class EspClient {
 
     public static final String DEFAULT_ESP_URL = "https://developer.sepush.co.za/business/2.0";
+
     private final IAuthenticationProvider auth;
     private final String baseUrl;
-
     private final HttpClient httpClient;
 
 
@@ -111,7 +111,7 @@ public class EspClient {
         }
 
         /**
-         * Builds & returns the EspClient
+         * Builds and returns the EspClient
          *
          * @return Esp client object
          */
