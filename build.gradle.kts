@@ -33,10 +33,8 @@ signing {
     setRequired {
         gradle.taskGraph.allTasks.any { it is PublishToMavenRepository }
     }
-    val signingKeyId: String? by project
-    val signingKey: String? by project
-    val signingPassword: String? by project
-    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+    val key = System.getenv("GPG_SECRET_KET")
+    useInMemoryPgpKeys(key, null)
     sign(publishing.publications)
 }
 
@@ -53,8 +51,8 @@ publishing {
         maven {
             url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
             credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
+                username = System.getenv("JRELEASER_NEXUS2_USERNAME")
+                password = System.getenv("JRELEASER_NEXUS2_PASSWORD")
             }
         }
     }
@@ -93,28 +91,6 @@ publishing {
                         email.set("luveshen.pillay@gmail.com")
                     }
                 }
-            }
-        }
-    }
-}
-
-nexusPublishing {
-    repositories {
-        sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
-
-            username.set(System.getenv(""))
-
-            val ossrhUsername = providers
-                    .environmentVariable("OSSRH_USERNAME")
-                    .forUseAtConfigurationTime()
-            val ossrhPassword = providers
-                    .environmentVariable("OSSRH_PASSWORD")
-                    .forUseAtConfigurationTime()
-            if (ossrhUsername.isPresent && ossrhPassword.isPresent) {
-                username.set(ossrhUsername.get())
-                password.set(ossrhPassword.get())
             }
         }
     }
