@@ -4,9 +4,6 @@ plugins {
     id("signing")
 }
 
-group = "org.jesp"
-version = "1.0-SNAPSHOT"
-
 repositories {
     mavenCentral()
 }
@@ -30,12 +27,20 @@ publishing {
                 password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
             }
         }
+        maven {
+            name = "OSSRH"
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
     }
     publications {
         create<MavenPublication>("Maven") {
             groupId = "org.jesp"
             artifactId = "esp-wrapper"
-            version = "0.001-SNAPSHOT"
+            version = "1.0-SNAPSHOT"
             from(components["java"])
         }
         withType<MavenPublication> {
