@@ -1,4 +1,4 @@
-import org.jesp.EspClient;
+import io.github.polymorphicpanther.jesp.EspClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;

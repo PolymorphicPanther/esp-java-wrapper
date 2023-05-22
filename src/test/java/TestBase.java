@@ -1,4 +1,4 @@
-import org.jesp.EspClient;
+import io.github.polymorphicpanther.jesp.EspClient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
