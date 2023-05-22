@@ -30,18 +30,42 @@ publishing {
                 password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
             }
         }
-        maven {
-            name = "OSSRH"
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
-        }
     }
     publications {
-        register<MavenPublication>("gpr") {
+        create<MavenPublication>("Maven") {
+            groupId = "org.jesp"
+            artifactId = "esp-wrapper"
+            version = "0.001-SNAPSHOT"
             from(components["java"])
+        }
+        withType<MavenPublication> {
+            pom {
+                packaging = "jar"
+                name.set("Esp Wrapper")
+                description.set("A Java wrapper for the Eskom Se Push API")
+                licenses {
+                    license {
+                        name.set("MIT license")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                issueManagement {
+                    system.set("Github")
+                    url.set("https://github.com/PolymorphicPanther/esp-java-wrapper/issues")
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/PolymorphicPanther/esp-java-wrapper.git")
+                    developerConnection.set("scm:git:git@github.com:PolymorphicPanther/esp-java-wrapper.git")
+                    url.set("https://github.com/PolymorphicPanther/esp-java-wrapper")
+                }
+                developers {
+                    developer {
+                        id.set("luvip")
+                        name.set("Luveshen Pillay")
+                        email.set("luveshen.pillay@gmail.com")
+                    }
+                }
+            }
         }
     }
 }
