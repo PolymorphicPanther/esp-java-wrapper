@@ -49,3 +49,5 @@ jobs:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAVEN_USERNAME: ${{secrets.JRELEASER_NEXUS2_USERNAME}}
           MAVEN_PASSWORD: ${{secrets.JRELEASER_NEXUS2_PASSWORD}}
+          SIGN_PASS_PHRASE: ${{secrets.GPG_PASSPHRASE}}
+          SIGN_KEY: ${{secrets.GPG_PVT_KEY}}

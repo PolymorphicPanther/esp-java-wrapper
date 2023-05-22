@@ -70,6 +70,13 @@ publishing {
     }
 }
 
+signing{
+    val key = System.getenv("SIGN_KEY")
+    val passPhrase = System.getenv("SIGN_PASS_PHRASE")
+    useInMemoryPgpKeys(key, passPhrase)
+    sign(publishing.publications)
+}
+
 tasks.test {
     useJUnitPlatform()
 }
