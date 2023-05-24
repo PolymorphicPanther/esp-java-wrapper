@@ -1,4 +1,5 @@
 # esp-java-wrapper
+[![Download](https://img.shields.io/maven-central/v/io.github.polymorphicpanther/esp-wrapper.svg)](https://central.sonatype.com/artifact/io.github.polymorphicpanther/esp-wrapper)
 
 Java wrapper for the [Eskom Se Push API](https://eskomsepush.gumroad.com/l/api)
 
