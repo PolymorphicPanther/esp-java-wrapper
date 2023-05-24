@@ -45,7 +45,7 @@ publishing {
         create<MavenPublication>("Maven") {
             groupId = "io.github.polymorphicpanther"
             artifactId = "esp-wrapper"
-            version = "0.0.0"
+            version = "0.0.1"
             from(components["java"])
         }
         withType<MavenPublication> {
@@ -53,6 +53,7 @@ publishing {
                 packaging = "jar"
                 name.set("Esp Wrapper")
                 description.set("A Java wrapper for the Eskom Se Push API")
+                url.set("https://github.com/PolymorphicPanther/esp-java-wrapper")
                 licenses {
                     license {
                         name.set("MIT license")
