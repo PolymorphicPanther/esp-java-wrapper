@@ -120,5 +120,25 @@ Output
 Area info: name = Fourways Ext 10 (10) current event note = Stage 4
 ```
 
-### 3.5) Areas nearby
+### 3.5) Area search
+
+```java
+```
+
+Output
+
+```
+
+```
+
+### 3.6) Areas nearby
+
+```java
+```
+
+Output
+
+```
+
+```
 
