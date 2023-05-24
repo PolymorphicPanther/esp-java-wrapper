@@ -17,6 +17,11 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
+java{
+    withSourcesJar()
+    withJavadocJar()
+}
+
 publishing {
     repositories {
         maven {
