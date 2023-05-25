@@ -124,22 +124,30 @@ Area info: name = Fourways Ext 10 (10) current event note = Stage 4
 ### 3.5) Area search
 
 ```java
+var searchResults = client.areas().search("Somerset West").build().get();
+var firstArea = searchResults.areas()[0];
+
+System.out.printf("Area: name = %s region = %s", firstArea.name(), firstArea.region());
 ```
 
 Output
 
 ```
-
+Area: name = Somerset West (3) region = City of Cape Town
 ```
 
 ### 3.6) Areas nearby
 
 ```java
+var areasNearBy = client.areas().nearBy(-33.9596, 18.4709).build().get();
+var firstArea = areasNearBy.areas()[0];
+
+System.out.printf("Area: name = %s region = %s", firstArea.name(), firstArea.region());
 ```
 
 Output
 
 ```
-
+Area: name = Rondebosch (South) (5) region = City of Cape Town
 ```
 
