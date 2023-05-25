@@ -45,7 +45,7 @@ publishing {
         create<MavenPublication>("Maven") {
             groupId = "io.github.polymorphicpanther"
             artifactId = "esp-wrapper"
-            version = "0.0.1"
+            version = "0.0.2"
             from(components["java"])
         }
         withType<MavenPublication> {
